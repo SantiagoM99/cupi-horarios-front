@@ -1,0 +1,87 @@
+/* Estilos generales */
+.title {
+    color: #ffa123;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    color: #465157;
+    text-align: center;
+}
+
+.text {
+    color: #465157;
+}
+
+/* Estilos para la tabla personalizada */
+.custom-table {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    padding: 5px;
+    color: #465157;
+}
+
+.custom-table-header, .custom-table-row {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    padding: 5px;
+    color: #465157;
+}
+
+.table-header {
+    background-color: #4CAF50;
+    color: white;
+    font-weight: bold;
+}
+
+.table-row:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.table-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #465157;
+}
+
+.table-cell input {
+    margin: 0;
+}
+
+/* Estilo para los checkboxes */
+.stCheckbox .st-bh .st-eq input[type="checkbox"]:checked + div {
+    color: #ffa123; /* Color del icono cuando está seleccionado */
+}
+
+.stCheckbox .st-bh .st-eq input[type="checkbox"] + div {
+    border: 2px solid #ffa123; /* Borde del checkbox */
+}
+
+/* Estilos del menú de opciones */
+.stOptionMenu .st-bh {
+    background-color: #f0f0f0; /* Color de fondo del menú */
+    border: 2px solid #3B41C9; /* Borde del menú */
+}
+
+.stOptionMenu .st-bh .st-eq {
+    color: #3B41C9; /* Color del texto del menú */
+}
+
+.stOptionMenu .st-bh .st-eq .st-ec {
+    color: #3B41C9; /* Color del icono del menú */
+}
+
+.stOptionMenu .st-bh .st-eq input:checked + .st-ec {
+    color: #3B41C9; /* Color del icono cuando está seleccionado */
+}
+
+/* Ancho fijo para los textboxes */
+.fixed-width-textbox {
+    width: 40px;
+    text-align: center;
+}

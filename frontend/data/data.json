@@ -1,0 +1,18 @@
+{
+    "tipo_turno": {
+      "P": "Presencial",
+      "R": "Remoto"
+    },
+    "llaves_turno": ["P", "R"],
+    "dias": ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"],
+    "horarios": [
+      "8:00 - 9:00", "9:00 - 9:30", "9:30 - 10:30", "10:30 - 11:00",
+      "11:00 - 12:00", "12:00 - 12:30", "12:30 - 1:30", "1:30 - 2:00",
+      "2:00 - 3:00", "3:00 - 3:30", "3:30 - 4:30", "4:30 - 5:00", "5:00 - 6:00"
+    ],
+    "asistentes": [
+      "Andres Martin Ochoa Toro", "Federico Melo Barrero", "Mariana Ruiz Giraldo", "Santiago Martinez Novoa",
+      "Gabriel Eduardo Ardila Carrillo", "Nicolas Carvajal Chaves", "David Alejandro Fuquen Florez"
+    ]
+  }
+  
