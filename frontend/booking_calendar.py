@@ -1,8 +1,9 @@
 import streamlit as st
-from utils.fetch_data import load_local_data, fetch_chosen_schedule
+from utils.fetch_data import load_local_data, fetch_chosen_schedule, fetch_assistants
 from components.option_menu import display_option_menu
 from components.schedule_table import display_schedule_table
 from components.availability_table import display_availability_table
+from utils.hour_standarisation import format_schedule_start_time
 
 data = load_local_data('data/data.json')
 mock_data = load_local_data('data/mock_data.json')
@@ -11,38 +12,32 @@ tipo_turno = data["tipo_turno"]
 llaves_turno = data["llaves_turno"]
 dias = data["dias"]
 horarios = data["horarios"]
-asistentes = data["asistentes"]
+assistants = fetch_assistants()
+
+# Names displayed in the dropdown, can be changed to any other field such as first_name or last_name
+
+assistants_nicknames = [assistant["nickname"] for assistant in assistants]
 
 selected_times = {
-    "Horario": {day: {time: ["N", "N"] for time in horarios} for day in dias},
-    "Disponibilidad": {day: {time: {llaves_turno[0]: False, llaves_turno[1]: False} for time in horarios} for day in dias}
+    "Horario": {day: {format_schedule_start_time(time): ["N", "N"] for time in horarios} for day in dias},
+    "Disponibilidad": {day: {format_schedule_start_time(time): {llaves_turno[0]: False, llaves_turno[1]: False} for time in horarios} for day in dias}
 }
 
 st.markdown("<style>{}</style>".format(open('style/style.css').read()), unsafe_allow_html=True)
 
-final_schedule = fetch_chosen_schedule(mock_data)
+schedule = fetch_chosen_schedule(mock_data)
 
-schedule = {day: {time: {"Presencial": None, "Remoto": None} for time in horarios} for day in dias}
-for entry in final_schedule:
-    assistant_code = int(entry["assistant_code"])
-    remote_only = entry["remote_only"]
-    time_slot_id = entry["time_slot_id"]
-    day_index = int(time_slot_id[-1]) % len(dias)
-    time_index = int(time_slot_id[-2]) % len(horarios)
-    day = dias[day_index]
-    time = horarios[time_index]
-    tipo = "Remoto" if remote_only else "Presencial"
-    schedule[day][time][tipo] = asistentes[assistant_code % len(asistentes)]
+
 
 st.markdown(f"<h1 class='title'>Cupi-horarios</h1>", unsafe_allow_html=True)
 
 selected_tab = display_option_menu()
 
 if selected_tab == "Horario":
-    display_schedule_table(schedule, dias, horarios)
+    display_schedule_table(schedule, horarios,dias)
 
 elif selected_tab == "Disponibilidad":
-    display_availability_table(selected_tab, selected_times, dias, horarios, llaves_turno, asistentes)
+    display_availability_table(assistants, selected_times, dias, horarios, llaves_turno, selected_tab)
 
 st.markdown("<div style='text-align: center; margin-top: 20px;'>", unsafe_allow_html=True)
 if st.button("Guardar"):
